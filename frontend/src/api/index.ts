@@ -1,8 +1,7 @@
 import axios from 'axios'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+const API_URL = 'https://sanctity-backend-t7vk.onrender.com'
 console.log('API_URL being used:', API_URL)
-console.log('VITE_API_URL env var:', import.meta.env.VITE_API_URL)
 
 export const api = axios.create({
   baseURL: API_URL,
