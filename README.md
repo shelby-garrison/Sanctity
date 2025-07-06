@@ -23,35 +23,4 @@ Sanctity AI/
 ```
 
 
----
-
-## Quick Start (with Docker Compose)
-
-1. **Clone the repository:**
-   ```sh
-   git clone <repo-url>
-   cd Sanctity
-   ```
-2. **Start all services:**
-   ```sh
-   docker-compose up --build
-   ```
-   - Backend API: http://localhost:3001
-   - Frontend: http://localhost:3000
-   - PostgreSQL: localhost:5432
-
-3. **Stop services:**
-   ```sh
-   docker-compose down
-   ```
-
----
-
-## Environment Variables
-
-See `docker-compose.yml` for all environment variables. Key ones include:
-- `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, `DB_DATABASE`
-- `JWT_SECRET`, `JWT_EXPIRES_IN` (in /backend)
-- `VITE_API_URL` (in /frontend)
-
----
+Live Link- https://sanctity-frontend.onrender.com
