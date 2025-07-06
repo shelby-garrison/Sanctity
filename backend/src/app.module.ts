@@ -24,6 +24,9 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
       synchronize: process.env.NODE_ENV === 'development',
       logging: process.env.NODE_ENV === 'development',
       namingStrategy: new SnakeNamingStrategy(),
+      ssl: process.env.NODE_ENV === 'production' ? {
+        rejectUnauthorized: false,
+      } : false,
     }),
     AuthModule,
     UsersModule,
