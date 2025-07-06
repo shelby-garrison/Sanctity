@@ -1,27 +1,8 @@
 version: '3.8'
 
 services:
-  # PostgreSQL Database
-  postgres:
-    image: postgres:15-alpine
-    container_name: comment_app_db
-    environment:
-      POSTGRES_DB: db_name
-      POSTGRES_USER: postgres_username
-      POSTGRES_PASSWORD: postgres_password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - "5432:5432"
-    networks:
-      - comment_app_network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    command: postgres -c 'max_connections=100'
+  # Note: Using Render PostgreSQL database instead of local PostgreSQL
+  # Database URL: postgresql://sanctity:AVj8dJLe56AjeMAybU7Qiqr9e1gJo7IL@dpg-d1laimer433s73dga52g-a.singapore-postgres.render.com/sanctityai
 
   # Backend API
   backend:
@@ -32,19 +13,16 @@ services:
     container_name: comment_app_backend
     environment:
       - NODE_ENV=production
-      - DB_HOST=postgres
+      - DB_HOST=dpg-d1laimer433s73dga52g-a.singapore-postgres.render.com
       - DB_PORT=5432
-      - DB_USERNAME=postgres_username
-      - DB_PASSWORD=postgres_password
-      - DB_DATABASE=db_name
+      - DB_USERNAME=sanctity
+      - DB_PASSWORD=AVj8dJLe56AjeMAybU7Qiqr9e1gJo7IL
+      - DB_DATABASE=sanctityai
       - JWT_SECRET=secret-jwt
       - JWT_EXPIRES_IN=24h
       - PORT=3001
     ports:
       - "3001:3001"
-    depends_on:
-      postgres:
-        condition: service_healthy
     networks:
       - comment_app_network
     healthcheck:
@@ -70,9 +48,6 @@ services:
     networks:
       - comment_app_network
     restart: unless-stopped
-
-volumes:
-  postgres_data:
 
 networks:
   comment_app_network:

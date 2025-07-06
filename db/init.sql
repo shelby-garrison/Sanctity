@@ -1,8 +1,3 @@
--- Create database if it doesn't exist
-SELECT 'CREATE DATABASE comment_app'
-WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'comment_app')\gexec
-
-\c comment_app;
 
 -- Create users table
 CREATE TABLE IF NOT EXISTS users (
@@ -13,6 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 -- Create comments table
 CREATE TABLE IF NOT EXISTS comments (
